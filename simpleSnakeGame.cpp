@@ -88,5 +88,37 @@ bool findSnake(pair<int, int> position) {
     }
     return false;
 }
+
+void display() {
+    system("cls");
+    
+    for (int x = 0; x < WIDTH + 2; x++) {
+        cout << '#';
+    }
+    cout << endl;
+
+    for (int y = 0; y < HEIGHT; y++) {
+        cout << '#';
+        for (int x = 0; x < WIDTH; x++) {
+            if (make_pair(x, y) == snake[0]) {
+                cout << 'O';
+            } else if (findSnake(make_pair(x, y))) {
+                cout << 'X';
+            } else if (make_pair(x, y) == food) {
+                cout << '*';
+            } else {
+                cout << ' ';
+            }
+        }
+        cout << '#' << endl;
+    }
+
+    for (int x = 0; x < WIDTH + 2; x++) {
+        cout << '#';
+    }
+    cout << endl;
+
+    cout << "Score: " << score << endl;
+}
     
 }
