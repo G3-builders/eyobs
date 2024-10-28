@@ -22,4 +22,45 @@ private:
     int score;
     int snakeLength;
     
+    
+    void moveSnake() {
+    pair<int, int> head = snake[0];
+    pair<int, int> newHead = head;
+
+    switch (dir) {
+        case LEFT: newHead.first--; break;
+        case RIGHT: newHead.first++; break;
+        case UP: newHead.second--; break;
+        case DOWN: newHead.second++; break;
+        default: break;
+    }
+
+    if (newHead.first < 0 || newHead.first >= WIDTH || 
+        newHead.second < 0 || newHead.second >= HEIGHT ||
+        findSnake(newHead)) {
+        gameOver = true;
+        return;
+    }
+
+    for (int i = snakeLength; i > 0; --i) {
+        snake[i] = snake[i - 1];
+    }
+    snake[0] = newHead;
+
+    if (newHead == food) {
+        score++;
+        snakeLength++;
+        placeFood();
+    }
+}
+
+bool findSnake(pair<int, int> position) {
+    for (int i = 1; i < snakeLength; ++i) {
+        if (snake[i] == position) {
+            return true;
+        }
+    }
+    return false;
+}
+    
 }
