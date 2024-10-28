@@ -22,6 +22,32 @@ private:
     int score;
     int snakeLength;
     
+
+    public:
+    SnakeGame() {
+        for (int i = 0; i < HEIGHT; ++i) {
+            for (int j = 0; j < WIDTH; ++j) {
+                grid[i][j] = 0;
+            }
+        }
+        snake[0] = make_pair(WIDTH / 2, HEIGHT / 2);
+        snakeLength = 1; 
+        dir = STOP;
+        gameOver = false;
+        score = 0;
+        placeFood();
+    }
+
+    void placeFood() {
+        while (true) {
+            int x = rand() % WIDTH;
+            int y = rand() % HEIGHT;
+            if (grid[y][x] == 0) {
+                food = make_pair(x, y);
+                break;
+            }
+        }
+    }
     
     void moveSnake() {
     pair<int, int> head = snake[0];
