@@ -121,4 +121,28 @@ void display() {
     cout << "Score: " << score << endl;
 }
     
+void run() {
+    while (!gameOver) {
+        if (_kbhit()) {
+            switch (_getch()) {
+                case 'a': if (dir != RIGHT) dir = LEFT; break;
+                case 'd': if (dir != LEFT) dir = RIGHT; break;
+                case 'w': if (dir != DOWN) dir = UP; break;
+                case 's': if (dir != UP) dir = DOWN; break;
+            }
+        }
+        moveSnake();
+        display();
+        Sleep(100);
+    }
+    cout << "Game Over! Final Score: " << score << endl;
+}
+
+}
+
+int main() {
+    srand(static_cast<unsigned int>(time(0))); 
+    SnakeGame game;
+    game.run();
+    return 0;
 }
